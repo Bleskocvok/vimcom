@@ -1,5 +1,5 @@
 
-function! com#RefreshComm() abort
+function! vimcom#RefreshComm() abort
     " TODO: Use value from &comments
     " if has_key(g:oneline_comments_map, &filetype)
         let g:com = get(g:oneline_comments_map, &filetype, '#')
@@ -8,11 +8,11 @@ function! com#RefreshComm() abort
     " endif
 endfunction
 
-function! com#IsPrefix(str, pref) abort
+function! vimcom#IsPrefix(str, pref) abort
     return a:str[ 0 : len(a:pref) - 1 ] == a:pref
 endfunction
 
-function! com#CountPrefixSpaces(str) abort
+function! vimcom#CountPrefixSpaces(str) abort
     let l:size = len(a:str)
     for i in range(0, l:size - 1)
         if (a:str[i] != " ")
@@ -22,7 +22,7 @@ function! com#CountPrefixSpaces(str) abort
     return l:size
 endfunction
 
-function! com#SpaceStr(size) abort
+function! vimcom#SpaceStr(size) abort
     let l:str = ""
     for i in range(a:size)
         let l:str .= " "
@@ -30,7 +30,7 @@ function! com#SpaceStr(size) abort
     return l:str
 endfunction
 
-function! com#ToggleComments(begin, end) abort
+function! vimcom#ToggleComments(begin, end) abort
     " Check if all lines are commented
     let l:comment = g:com . " "
     let l:oneline = a:end - a:begin == 0
@@ -42,19 +42,19 @@ function! com#ToggleComments(begin, end) abort
     for l:i in range(a:begin, a:end)
         let l:line = getline(l:i)
         if len(l:line) > 0
-            let l:spaces = min([ l:spaces, com#CountPrefixSpaces(l:line) ])
+            let l:spaces = min([ l:spaces, vimcom#CountPrefixSpaces(l:line) ])
             let l:has_spaces = 1
         endif
     endfor
 
     let l:spaces = l:has_spaces ? l:spaces : 0
-    let l:ws = com#SpaceStr(l:spaces)
+    let l:ws = vimcom#SpaceStr(l:spaces)
     " echo "ws '" . l:ws . "' has " . string(l:has_spaces) . " spaces " . string(l:spaces)
     let l:ws_com = l:ws . l:comment
 
     for l:i in range(a:begin, a:end)
         let l:line = getline(l:i)
-        if (len(l:line) > 0 || l:oneline) && !com#IsPrefix(l:line, l:ws_com)
+        if (len(l:line) > 0 || l:oneline) && !vimcom#IsPrefix(l:line, l:ws_com)
             let l:all = 0
         endif
     endfor

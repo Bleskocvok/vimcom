@@ -27,16 +27,16 @@ let g:oneline_comments_map = {
 
 augroup RefreshCommGroup
     autocmd!
-    autocmd WinEnter,BufEnter * call com#RefreshComm()
+    autocmd WinEnter,BufEnter * call vimcom#RefreshComm()
 augroup end
 
-call com#RefreshComm()
+call vimcom#RefreshComm()
 
 " Command to change the comment string
 command -nargs=1 SetComment let g:com = string(<args>)
 
-" execute 'command -range=1 CmdComm :call com#ToggleComments(<line1>, <line2>)'
-command -range=1 CmdComm :call com#ToggleComments(<line1>, <line2>)
+" execute 'command -range=1 CmdComm :call vimcom#ToggleComments(<line1>, <line2>)'
+command -range=1 CmdComm :call vimcom#ToggleComments(<line1>, <line2>)
 
 " Comment/uncomment using ^/
 vnoremap <silent> <C-_> :CmdComm<CR>
