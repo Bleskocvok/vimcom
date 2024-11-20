@@ -1,9 +1,9 @@
 scriptencoding utf-8
 
-if exists('g:loaded_com')
-  finish
+if exists('g:loaded_vimcom')
+    finish
 endif
-let g:loaded_com = 1
+let g:loaded_vimcom = 1
 
 
 " Apparently needed for nvim, otherwise it doesn't work
