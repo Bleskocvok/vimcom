@@ -16,7 +16,7 @@ Press Ctrl+/ to comment/uncomment a line in normal/insert mode, or multiple line
 ### Vim
 
 ```sh
-cd ~/.vim/pack/vimcom
+cd ~/.vim/pack
 git clone https://github.com/Bleskocvok/vimcom.git
 ```
 
